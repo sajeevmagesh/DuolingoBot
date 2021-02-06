@@ -30,7 +30,6 @@ def lesson(lesson):
     driver.get(f"https://www.duolingo.com/skill/es/{lesson}/")
     time.sleep(3.5)
     question()
-    time.sleep(30)
     question()
 correct_or_not = False
 
@@ -105,6 +104,13 @@ def Write_this_in_Spanish():
     keyboard.click()
     text_area=driver.find_element_by_class_name("_2EMUT")
     text_area.click()
+    question2=driver.find_elements_by_class_name("_34k_q")
+    for x in range(len(question2)):
+        if x>0:
+            question=question+" "+question2[x].text.lower()
+        else:
+            question=question2[x].text.lower()
+    answer=translate(question,"spanish")
     text_area.send_keys(answer)
     text_area.send_keys(Keys.ENTER)
 

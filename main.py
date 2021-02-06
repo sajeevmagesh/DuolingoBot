@@ -43,7 +43,7 @@ def question():
         answer=translate(question, "spanish")
         answer_choices=driver.find_elements_by_class_name("HaQTI")
         for x in range(len(answer_choices)):
-            if answer==answer_choices[x].text:
+            if answer==answer_choices[x].text.lower():
                 answer_choices[x].click()
         submit_button.click()
         submit_button.click()
@@ -57,6 +57,13 @@ def question():
     elif "Mark the correct meaning" in question:
         question=driver.find_element_by_class_name("_3-JBe").text
         print(question)
+        answer=translate(question, "spanish")
+        answer_choices=driver.find_elements_by_class_name("_2CuNz")
+        for z in range(len(answer_choices)):
+            if answer_choices[z].text.lower()==answer:
+                answer_choices[z].click()
+        submit_button.click()
+        submit_button.click()
     elif "Write this in Spanish" in question:
         keyboard=driver.find_element_by_class_name("_29cJe")
         keyboard.click()

@@ -32,6 +32,7 @@ def lesson(lesson):
     question()
     time.sleep(30)
     question()
+correct_or_not = False
 
 def question():
     correct_or_not = False
@@ -50,6 +51,7 @@ def question():
         skip.click()
 
 def Which_one_of_these_is(question):
+    correct_or_not=False
     question=question.replace('Which one of these is ','')
     question=question[1:-1]
     question=question[:-1]
@@ -64,16 +66,24 @@ def Which_one_of_these_is(question):
             submit_button.click()
     return correct_or_not
 
-def Write_this_in_English():
+def Write_this_in_English(question):
+    correct_or_not=False
     keyboard=driver.find_element_by_class_name("_29cJe")
     keyboard.click()
     text_area=driver.find_element_by_class_name("_2EMUT")
     text_area.click()
-    
+    question2=driver.find_elements_by_class_name("_34k_q")
+    for x in range(len(question2)):
+        if x>0:
+            question=question+" "+question2[x].text.lower()
+        else:
+            question=question2[x].text.lower()
+    answer=translate(question,"english")
     text_area.send_keys(answer)
     text_area.send_keys(Keys.ENTER)
     
 def Mark_the_correct_meaning(question):
+    correct_or_not=False
     question = driver.find_element_by_class_name("_3-JBe")
     if translate(question.text, "spanish") == question:
         translation = translate(question.text, "english")
@@ -90,6 +100,7 @@ def Mark_the_correct_meaning(question):
     return correct_or_not
     
 def Write_this_in_Spanish():
+    correct_or_not=False
     keyboard=driver.find_element_by_class_name("_29cJe")
     keyboard.click()
     text_area=driver.find_element_by_class_name("_2EMUT")
@@ -107,9 +118,11 @@ def translate(question, language):
         return None
     time.sleep(3.5)
     translation = secondwindow.find_element_by_xpath("/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[2]/c-wiz[2]/div[5]/div/div[1]/span[1]/span/span")
+    translation1=translation.text.lower()
     secondwindow.quit()
-    return translation.text.lower()
-    
+    return translation1
+
+
 
 
 lesson("Intro")

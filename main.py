@@ -5,21 +5,24 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
-username = "Test123"
-password = "Test123"
+username = "Test1234"
+password = "Test1234"
 
-PATH = "chromedriver"
+PATH = "./chromedriver"
 
 driver = webdriver.Chrome(PATH)
 
 driver.get("https://www.duolingo.com/log-in?isLoggingIn=true")
+parentform=driver.find_element_by_class_name("_3jeu0")
+usernameform=driver.find_element_by_xpath("//div[@class='_3jeu0']/div[@class='_2a3s4']/label[@class='_2S_JP']/div[@class='_2rjZr']/input")
+passwordform=driver.find_element_by_xpath("//div[@class='_3jeu0']/div[@class='_2a3s4'][position()=2]/label[@class='_2S_JP']/div[@class='_2rjZr']/input")
+loginbtn=driver.find_element_by_class_name("_2oW4v")
+usernameform.click()
+usernameform.send_keys(username)
+passwordform.click()
+passwordform.send_keys(password)
+loginbtn.click()
 
-time.sleep(10)
-
-username_and_password = driver.find_element_by_class_name("_3MNft fs-exclude")
-
-for i in username_and_password:
-    i.send_keys("Test123")
 
 
 

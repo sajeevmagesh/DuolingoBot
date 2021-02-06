@@ -35,7 +35,24 @@ def lesson(lesson):
 def question():
     correct_or_not = False
     answer=""
-    question=driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div/div[2]/div/div/div/div/div[1]/h1/span").text
+    try:
+        tip=driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div/div[2]/div/div/div/div/div/div[2]/span/span")
+    except:
+        tip=""
+    if "Here's a tip" in tip:
+        tip_button=driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div/div[2]/div/div/div/div/div/div[8]/div/label[1]/div")
+        tip_button.click()
+        submit_button=driver.find_element_by_class_name("_2orIw")
+        submit_button.click()
+        return None
+    
+    try:
+        question=driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div/div[2]/div/div/div/div/div[1]/h1/span").text
+    except:
+        submit_button=driver.find_element_by_class_name("_2orIw")
+        submit_button.click()
+        return None
+
     if "Which one of these is" in question:
         Which_one_of_these_is(question)
     elif "Write this in English" in question:

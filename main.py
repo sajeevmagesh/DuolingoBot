@@ -32,6 +32,7 @@ driver.get(f"https://www.duolingo.com/skill/es/{lesson}/")
 errors=[[]]
 
 def question():
+    submit_button=driver.find_element_by_class_name("_2orIw")
     question=driver.find_element_by_xpath("//h1[@class='_2LZl6']/span").text
     print(question)
     answer=""
@@ -41,7 +42,11 @@ def question():
         question=question[:-1]
         answer=translate(question, "spanish")
         answer_choices=driver.find_elements_by_class_name("HaQTI")
-        print(answer_choices)
+        for x in range(len(answer_choices)):
+            if answer==answer_choices[x].text:
+                answer_choices[x].click()
+        submit_button.click()
+        submit_button.click()
     elif "Write this in English" in question:
         keyboard=driver.find_element_by_class_name("_29cJe")
         keyboard.click()

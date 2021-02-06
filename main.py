@@ -40,6 +40,7 @@ if "Which one of these is" in question:
 elif "Write this in English" in question:
     keyboard=driver.find_element_by_class_name("_29cJe")
     keyboard.click()
+<<<<<<< HEAD
     text_area=driver.find_element_by_class_name("_2EMUT")
     text_area.click()
     text_area.send_keys(answer)
@@ -54,3 +55,33 @@ elif "Write this in Spanish" in question:
     text_area.click()
     text_area.send_keys(answer)
     text_area.send_keys(Keys.ENTER)
+=======
+
+except:
+    pass
+
+def translate(question, language):
+
+    PATH = "./chromedriver"
+
+    driver = webdriver.Chrome(PATH)
+
+    if language == "english":
+        driver.get(f"https://translate.google.com/?sl=auto&tl=en&text={question}&op=translate")
+
+    elif language == "spanish":
+        driver.get(f"https://translate.google.com/?sl=auto&tl=es&text={question}&op=translate")
+
+    else:
+        return None
+    
+    time.sleep(3.5)
+
+    translation = driver.find_element_by_xpath("/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[2]/c-wiz[2]/div[5]/div/div[1]/span[1]/span/span")
+    
+    return translation.text.lower()
+
+    driver.quit()
+
+    
+>>>>>>> 3677972631d0bec3e820d472f0d1a2a7a13a8993

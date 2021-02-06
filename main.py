@@ -57,24 +57,16 @@ elif "Write this in Spanish" in question:
 
 
 def translate(question, language):
-
     secondwindow = webdriver.Chrome(PATH)
-
     if language == "english":
         secondwindow.get(f"https://translate.google.com/?sl=auto&tl=en&text={question}&op=translate")
-
     elif language == "spanish":
         secondwindow.get(f"https://translate.google.com/?sl=auto&tl=es&text={question}&op=translate")
-
     else:
         return None
-    
     time.sleep(3.5)
-
     translation = secondwindow.find_element_by_xpath("/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[2]/c-wiz[2]/div[5]/div/div[1]/span[1]/span/span")
-    
     return translation.text.lower()
-
     secondwindow.quit()
 
     

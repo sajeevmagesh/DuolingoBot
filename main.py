@@ -45,7 +45,11 @@ def question():
         for x in range(len(answer_choices)):
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             if answer==answer_choices[x].text.lower():
+=======
+            if answer==answer_choices[x].text:
+>>>>>>> parent of af34ec9... I just made this program 10000% better
 =======
             if answer==answer_choices[x].text:
 >>>>>>> parent of af34ec9... I just made this program 10000% better
@@ -67,6 +71,7 @@ def question():
         print(question)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         answer=translate(question, "spanish")
         answer_choices=driver.find_elements_by_class_name("_2CuNz")
         for z in range(len(answer_choices)):
@@ -75,6 +80,8 @@ def question():
         submit_button.click()
         submit_button.click()
         
+=======
+>>>>>>> parent of af34ec9... I just made this program 10000% better
 =======
 >>>>>>> parent of af34ec9... I just made this program 10000% better
 =======

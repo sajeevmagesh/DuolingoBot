@@ -61,5 +61,7 @@ def translate(question, language):
     time.sleep(5)
 
     translation = driver.find_element_by_xpath("/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[2]/c-wiz[2]/div[5]/div/div[1]/span[1]/span/span")
-
+    driver.quit()
     return translation.text.lower()
+
+    

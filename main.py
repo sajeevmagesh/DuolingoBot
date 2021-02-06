@@ -40,7 +40,6 @@ if "Which one of these is" in question:
 elif "Write this in English" in question:
     keyboard=driver.find_element_by_class_name("_29cJe")
     keyboard.click()
-<<<<<<< HEAD
     text_area=driver.find_element_by_class_name("_2EMUT")
     text_area.click()
     text_area.send_keys(answer)
@@ -55,10 +54,7 @@ elif "Write this in Spanish" in question:
     text_area.click()
     text_area.send_keys(answer)
     text_area.send_keys(Keys.ENTER)
-=======
 
-except:
-    pass
 
 def translate(question, language):
 
@@ -84,4 +80,3 @@ def translate(question, language):
     driver.quit()
 
     
->>>>>>> 3677972631d0bec3e820d472f0d1a2a7a13a8993

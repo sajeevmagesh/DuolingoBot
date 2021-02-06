@@ -3,6 +3,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
 import time
 import urllib.parse
 username="Test1234"
@@ -24,22 +25,32 @@ passwordform.send_keys(password)
 loginbtn.click()
 
 ##Duolingo Lesson
-driver.implicitly_wait(10)
-time.sleep(10)
+time.sleep(7)
 lesson="Intro"
 
 driver.get(f"https://www.duolingo.com/skill/es/{lesson}/")
 question=driver.find_element_by_xpath("//h1[@class='_2LZl6']/span").text
 print(question)
+answer=""
 if "Which one of these is" in question:
     question=question.replace('Which one of these is ','')
     question=question[1:-1]
     question=question[:-1]
     print(question)
-try:
+elif "Write this in English" in question:
     keyboard=driver.find_element_by_class_name("_29cJe")
     keyboard.click()
-
-except:
-    pass
-
+    text_area=driver.find_element_by_class_name("_2EMUT")
+    text_area.click()
+    text_area.send_keys(answer)
+    text_area.send_keys(Keys.ENTER)
+elif "Mark the correct meaning" in question:
+    question=driver.find_element_by_class_name("_3-JBe").text
+    print(question)
+elif "Write this in Spanish" in question:
+    keyboard=driver.find_element_by_class_name("_29cJe")
+    keyboard.click()
+    text_area=driver.find_element_by_class_name("_2EMUT")
+    text_area.click()
+    text_area.send_keys(answer)
+    text_area.send_keys(Keys.ENTER)

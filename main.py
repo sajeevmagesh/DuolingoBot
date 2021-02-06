@@ -24,78 +24,78 @@ passwordform.click()
 passwordform.send_keys(password)
 loginbtn.click()
 
-##Duolingo Lesson
 time.sleep(7)
-lesson="Travel"
 
-driver.get(f"https://www.duolingo.com/skill/es/{lesson}/")
-errors=[[]]
+def lesson(lesson):
+    driver.get(f"https://www.duolingo.com/skill/es/{lesson}/")
+    time.sleep(3.5)
+    question()
+    time.sleep(30)
+    question()
 
 def question():
-    submit_button=driver.find_element_by_class_name("_2orIw")
-    question=driver.find_element_by_xpath("//h1[@class='_2LZl6']/span").text
-    print(question)
+    correct_or_not = False
     answer=""
+    question=driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div/div[2]/div/div/div/div/div[1]/h1/span").text
     if "Which one of these is" in question:
-        question=question.replace('Which one of these is ','')
-        question=question[1:-1]
-        question=question[:-1]
-        answer=translate(question, "spanish")
-        answer_choices=driver.find_elements_by_class_name("HaQTI")
-        for x in range(len(answer_choices)):
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            if answer==answer_choices[x].text.lower():
-=======
-            if answer==answer_choices[x].text:
->>>>>>> parent of af34ec9... I just made this program 10000% better
-=======
-            if answer==answer_choices[x].text:
->>>>>>> parent of af34ec9... I just made this program 10000% better
-=======
-            if answer==answer_choices[x].text:
->>>>>>> parent of af34ec9... I just made this program 10000% better
-                answer_choices[x].click()
-        submit_button.click()
-        submit_button.click()
+        Which_one_of_these_is(question)
     elif "Write this in English" in question:
-        keyboard=driver.find_element_by_class_name("_29cJe")
-        keyboard.click()
-        text_area=driver.find_element_by_class_name("_2EMUT")
-        text_area.click()
-        text_area.send_keys(answer)
-        text_area.send_keys(Keys.ENTER)
+        Write_this_in_English(question)
     elif "Mark the correct meaning" in question:
-        question=driver.find_element_by_class_name("_3-JBe").text
-        print(question)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        answer=translate(question, "spanish")
-        answer_choices=driver.find_elements_by_class_name("_2CuNz")
-        for z in range(len(answer_choices)):
-            if answer_choices[z].text.lower()==answer:
-                answer_choices[z].click()
-        submit_button.click()
-        submit_button.click()
-        
-=======
->>>>>>> parent of af34ec9... I just made this program 10000% better
-=======
->>>>>>> parent of af34ec9... I just made this program 10000% better
-=======
->>>>>>> parent of af34ec9... I just made this program 10000% better
+        Mark_the_correct_meaning(question)
     elif "Write this in Spanish" in question:
-        keyboard=driver.find_element_by_class_name("_29cJe")
-        keyboard.click()
-        text_area=driver.find_element_by_class_name("_2EMUT")
-        text_area.click()
-        text_area.send_keys(answer)
-        text_area.send_keys(Keys.ENTER)
+        Write_this_in_Spanish(question)
     else:
         skip=driver.find_element_by_class_name("J51YJ")
         skip.click()
+
+def Which_one_of_these_is(question):
+    question=question.replace('Which one of these is ','')
+    question=question[1:-1]
+    question=question[:-1]
+    answer=translate(question, "spanish")
+    answer_choices=driver.find_elements_by_class_name("HaQTI")
+    for x in range(len(answer_choices)):
+        if answer==answer_choices[x].text:
+            answer_choices[x].click()
+            correct_or_not = True
+            submit_button=driver.find_element_by_class_name("_2orIw")
+            submit_button.click()
+            submit_button.click()
+    return correct_or_not
+
+def Write_this_in_English():
+    keyboard=driver.find_element_by_class_name("_29cJe")
+    keyboard.click()
+    text_area=driver.find_element_by_class_name("_2EMUT")
+    text_area.click()
+    
+    text_area.send_keys(answer)
+    text_area.send_keys(Keys.ENTER)
+    
+def Mark_the_correct_meaning(question):
+    question = driver.find_element_by_class_name("_3-JBe")
+    if translate(question.text, "spanish") == question:
+        translation = translate(question.text, "english")
+    else:
+        translation = translate(question.text, "spanish")
+    answers = driver.find_elements_by_class_name("_2CuNz")
+    for i in answers:
+        if i.text.lower() == translation:
+            i.click()
+            correct_or_not = True
+            submit_button=driver.find_element_by_class_name("_2orIw")
+            submit_button.click()
+            submit_button.click()
+    return correct_or_not
+    
+def Write_this_in_Spanish():
+    keyboard=driver.find_element_by_class_name("_29cJe")
+    keyboard.click()
+    text_area=driver.find_element_by_class_name("_2EMUT")
+    text_area.click()
+    text_area.send_keys(answer)
+    text_area.send_keys(Keys.ENTER)
 
 def translate(question, language):
     secondwindow = webdriver.Chrome(PATH)
@@ -109,5 +109,6 @@ def translate(question, language):
     translation = secondwindow.find_element_by_xpath("/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[2]/c-wiz[2]/div[5]/div/div[1]/span[1]/span/span")
     return translation.text.lower()
     secondwindow.quit()
-question()
-    
+
+
+lesson("Intro")

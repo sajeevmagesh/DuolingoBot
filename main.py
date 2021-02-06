@@ -64,6 +64,7 @@ def question():
                 answer_choices[z].click()
         submit_button.click()
         submit_button.click()
+        
     elif "Write this in Spanish" in question:
         keyboard=driver.find_element_by_class_name("_29cJe")
         keyboard.click()

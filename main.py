@@ -26,35 +26,42 @@ loginbtn.click()
 
 ##Duolingo Lesson
 time.sleep(7)
-lesson="Intro"
+lesson="Travel"
 
 driver.get(f"https://www.duolingo.com/skill/es/{lesson}/")
-question=driver.find_element_by_xpath("//h1[@class='_2LZl6']/span").text
-print(question)
-answer=""
-if "Which one of these is" in question:
-    question=question.replace('Which one of these is ','')
-    question=question[1:-1]
-    question=question[:-1]
-    print(question)
-elif "Write this in English" in question:
-    keyboard=driver.find_element_by_class_name("_29cJe")
-    keyboard.click()
-    text_area=driver.find_element_by_class_name("_2EMUT")
-    text_area.click()
-    text_area.send_keys(answer)
-    text_area.send_keys(Keys.ENTER)
-elif "Mark the correct meaning" in question:
-    question=driver.find_element_by_class_name("_3-JBe").text
-    print(question)
-elif "Write this in Spanish" in question:
-    keyboard=driver.find_element_by_class_name("_29cJe")
-    keyboard.click()
-    text_area=driver.find_element_by_class_name("_2EMUT")
-    text_area.click()
-    text_area.send_keys(answer)
-    text_area.send_keys(Keys.ENTER)
+errors=[[]]
 
+def question():
+    question=driver.find_element_by_xpath("//h1[@class='_2LZl6']/span").text
+    print(question)
+    answer=""
+    if "Which one of these is" in question:
+        question=question.replace('Which one of these is ','')
+        question=question[1:-1]
+        question=question[:-1]
+        answer=translate(question, "spanish")
+        answer_choices=driver.find_elements_by_class_name("HaQTI")
+        print(answer_choices)
+    elif "Write this in English" in question:
+        keyboard=driver.find_element_by_class_name("_29cJe")
+        keyboard.click()
+        text_area=driver.find_element_by_class_name("_2EMUT")
+        text_area.click()
+        text_area.send_keys(answer)
+        text_area.send_keys(Keys.ENTER)
+    elif "Mark the correct meaning" in question:
+        question=driver.find_element_by_class_name("_3-JBe").text
+        print(question)
+    elif "Write this in Spanish" in question:
+        keyboard=driver.find_element_by_class_name("_29cJe")
+        keyboard.click()
+        text_area=driver.find_element_by_class_name("_2EMUT")
+        text_area.click()
+        text_area.send_keys(answer)
+        text_area.send_keys(Keys.ENTER)
+    else:
+        skip=driver.find_element_by_class_name("J51YJ")
+        skip.click()
 
 def translate(question, language):
     secondwindow = webdriver.Chrome(PATH)
@@ -68,5 +75,5 @@ def translate(question, language):
     translation = secondwindow.find_element_by_xpath("/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[2]/c-wiz[2]/div[5]/div/div[1]/span[1]/span/span")
     return translation.text.lower()
     secondwindow.quit()
-
+question()
     

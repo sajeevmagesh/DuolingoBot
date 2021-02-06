@@ -80,12 +80,21 @@ def Which_one_of_these_is(question):
             submit_button.click()
     return correct_or_not
 
-def Write_this_in_English():
-    keyboard=driver.find_element_by_class_name("_29cJe")
-    keyboard.click()
+def Write_this_in_English(question):
+    keyboard=driver.find_element_by_class_name("yWRY8")
+    if keyboard.text=="Use keyboard":
+        keyboard.click()
     text_area=driver.find_element_by_class_name("_2EMUT")
     text_area.click()
-    
+    text_area=driver.find_element_by_class_name("_2EMUT")
+    text_area.click()
+    question2=driver.find_elements_by_class_name("_34k_q")
+    for x in range(len(question2)):
+        if x>0:
+            question=question+" "+question2[x].text.lower()
+        else:
+            question=question2[x].text.lower()
+    answer=translate(question,"spanish")
     text_area.send_keys(answer)
     text_area.send_keys(Keys.ENTER)
     
@@ -102,9 +111,10 @@ def Mark_the_correct_meaning(question):
             submit_button.click()
     return correct_or_not
     
-def Write_this_in_Spanish():
-    keyboard=driver.find_element_by_class_name("_29cJe")
-    keyboard.click()
+def Write_this_in_Spanish(question):
+    keyboard=driver.find_element_by_class_name("yWRY8")
+    if keyboard.text=="Use keyboard":
+        keyboard.click()
     text_area=driver.find_element_by_class_name("_2EMUT")
     text_area.click()
     question2=driver.find_elements_by_class_name("_34k_q")

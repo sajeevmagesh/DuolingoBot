@@ -31,8 +31,10 @@ def lesson(lesson):
     time.sleep(3.5)
     question()
     question()
+    question()
 
 def question():
+    time.sleep(1)
     correct_or_not = False
     answer=""
     try:
@@ -82,7 +84,8 @@ def Which_one_of_these_is(question):
 
 def Write_this_in_English(question):
     keyboard=driver.find_element_by_class_name("yWRY8")
-    if keyboard.text=="Use keyboard":
+    print(keyboard.text)
+    if keyboard.text.lower()=="use keyboard":
         keyboard.click()
     text_area=driver.find_element_by_class_name("_2EMUT")
     text_area.click()
@@ -94,9 +97,11 @@ def Write_this_in_English(question):
             question=question+" "+question2[x].text.lower()
         else:
             question=question2[x].text.lower()
-    answer=translate(question,"spanish")
+    answer=translate(question,"english")
     text_area.send_keys(answer)
     text_area.send_keys(Keys.ENTER)
+    submit_button=driver.find_element_by_class_name("_2orIw")
+    submit_button.click()
     
 def Mark_the_correct_meaning(question):
     question = driver.find_element_by_class_name("_3-JBe")
@@ -113,7 +118,8 @@ def Mark_the_correct_meaning(question):
     
 def Write_this_in_Spanish(question):
     keyboard=driver.find_element_by_class_name("yWRY8")
-    if keyboard.text=="Use keyboard":
+    print(keyboard.text)
+    if keyboard.text.lower()=="use keyboard":
         keyboard.click()
     text_area=driver.find_element_by_class_name("_2EMUT")
     text_area.click()
@@ -126,6 +132,8 @@ def Write_this_in_Spanish(question):
     answer=translate(question,"spanish")
     text_area.send_keys(answer)
     text_area.send_keys(Keys.ENTER)
+    submit_button=driver.find_element_by_class_name("_2orIw")
+    submit_button.click()
 
 def translate(question, language):
     secondwindow = webdriver.Chrome(PATH)
@@ -137,8 +145,10 @@ def translate(question, language):
         return None
     time.sleep(3.5)
     translation = secondwindow.find_element_by_xpath("/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[2]/c-wiz[2]/div[5]/div/div[1]/span[1]/span/span")
-    return translation.text.lower()
+    translation2=translation.text.lower()
     secondwindow.quit()
+    return translation2
+
 
 
 lesson("Intro")

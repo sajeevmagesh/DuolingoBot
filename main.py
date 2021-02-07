@@ -112,6 +112,8 @@ def Which_one_of_these_is(question):
         pass
     if correct_or_not == False:
         errors.append([question, trueanswer])
+        submit_button=driver.find_element_by_class_name("_2orIw")
+        submit_button.click()
     return correct_or_not
 
 def Write_this_in_English(question):
@@ -185,6 +187,8 @@ def Mark_the_correct_meaning(question):
         pass
     if correct_or_not == False:
         errors.append([question, trueanswer])
+        submit_button=driver.find_element_by_class_name("_2orIw")
+        submit_button.click()
     return correct_or_not
     
 def Write_this_in_Spanish(question):
@@ -224,6 +228,7 @@ def Write_this_in_Spanish(question):
         pass
     if correct_or_not == False:
         errors.append([question, trueanswer])
+
 
     submit_button=driver.find_element_by_class_name("_2orIw")
     submit_button.click()

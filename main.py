@@ -237,7 +237,7 @@ def translate(question, language):
     else:
         return None
     time.sleep(3.5)
-    translation = secondwindow.find_element_by_xpath("/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[2]/c-wiz[2]/div[5]/div/div[1]/span[1]/span/span")
+    translation = secondwindow.find_element_by_class_name("VIiyi")
     translation2=translation.text.lower()
     secondwindow.quit()
     return translation2

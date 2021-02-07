@@ -29,8 +29,17 @@ time.sleep(7)
 def lesson(lesson):
     driver.get(f"https://www.duolingo.com/skill/es/{lesson}/")
     time.sleep(3.5)
-    question()
-    question()
+    lesson_not_over = True
+    while lesson_not_over == True:
+        try:
+            continue = driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div/div/div[1]/div/div/span/svg")
+            continue.click()
+            continue.click()
+            lesson_not_over = False
+        except:
+            correct_or_not = question()
+        if correct_or_not == False:
+
 
 def question():
     correct_or_not = False
@@ -54,17 +63,17 @@ def question():
         return None
 
     if "Which one of these is" in question:
-        Which_one_of_these_is(question)
+        correct_or_not = Which_one_of_these_is(question)
     elif "Write this in English" in question:
-        Write_this_in_English(question)
+        correct_or_not = Write_this_in_English(question)
     elif "Mark the correct meaning" in question:
-        Mark_the_correct_meaning(question)
+        correct_or_not = Mark_the_correct_meaning(question)
     elif "Write this in Spanish" in question:
-        Write_this_in_Spanish(question)
+        correct_or_not = Write_this_in_Spanish(question)
     else:
         skip=driver.find_element_by_class_name("J51YJ")
         skip.click()
-
+    return correct_or_not
 def Which_one_of_these_is(question):
     question=question.replace('Which one of these is ','')
     question=question[1:-1]
@@ -78,7 +87,9 @@ def Which_one_of_these_is(question):
             submit_button=driver.find_element_by_class_name("_2orIw")
             submit_button.click()
             submit_button.click()
-    return correct_or_not
+    if correct_or_not == False:
+        correct_answer = driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div/div[3]/div/div/div[1]/div/div[2]/div[1]/div/div")
+
 
 def Write_this_in_English(question):
     keyboard=driver.find_element_by_class_name("yWRY8")
@@ -97,6 +108,8 @@ def Write_this_in_English(question):
     answer=translate(question,"spanish")
     text_area.send_keys(answer)
     text_area.send_keys(Keys.ENTER)
+    if correct_or_not == False:
+        correct_answer = driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div/div[3]/div/div/div[1]/div/div[2]/div[1]/div/div")
     
 def Mark_the_correct_meaning(question):
     question = driver.find_element_by_class_name("_3-JBe")
@@ -109,7 +122,8 @@ def Mark_the_correct_meaning(question):
             submit_button=driver.find_element_by_class_name("_2orIw")
             submit_button.click()
             submit_button.click()
-    return correct_or_not
+    if correct_or_not == False:
+        correct_answer = driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div/div[3]/div/div/div[1]/div/div[2]/div[1]/div/div")
     
 def Write_this_in_Spanish(question):
     keyboard=driver.find_element_by_class_name("yWRY8")
@@ -126,7 +140,8 @@ def Write_this_in_Spanish(question):
     answer=translate(question,"spanish")
     text_area.send_keys(answer)
     text_area.send_keys(Keys.ENTER)
-
+    if correct_or_not == False:
+        correct_answer = driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div/div[3]/div/div/div[1]/div/div[2]/div[1]/div/div")
 def translate(question, language):
     secondwindow = webdriver.Chrome(PATH)
     if language == "english":

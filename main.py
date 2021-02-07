@@ -93,10 +93,10 @@ def Which_one_of_these_is(question):
     answer=translate(question, "spanish")
     for x in range(len(errors)):
         if question==errors[x][0]:
-            answer=errors[x][0]
+            answer=errors[x][1]
     answer_choices=driver.find_elements_by_class_name("HaQTI")
     for x in range(len(answer_choices)):
-        if answer==answer_choices[x].text:
+        if answer.lower()==answer_choices[x].text.lower():
             answer_choices[x].click()
             correct_or_not = True
             submit_button=driver.find_element_by_class_name("_2orIw")
@@ -104,10 +104,10 @@ def Which_one_of_these_is(question):
             submit_button.click()
     try:
         is_correct=driver.find_element_by_class_name("_1x6Dk")
-        if "Another correct solution:" in is_correct:
+        if "Another correct solution:" == is_correct:
             pass
         else:
-            trueanswer=driver.find_element_by_xpath("//*[@id='root']/div/div/div/div/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div/span[2]")
+            trueanswer=driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div/div[3]/div/div/div[1]/div/div[2]/div[1]/div/div").text
     except:
         pass
     if correct_or_not == False:
@@ -139,7 +139,7 @@ def Write_this_in_English(question):
     answer=translate(question,"english")
     for x in range(len(errors)):
         if question==errors[x][0]:
-            answer=errors[x][0]
+            answer=errors[x][1]
     text_area.send_keys(answer)
     text_area.send_keys(Keys.ENTER)
     incorrect=driver.find_elements_by_class_name("OLn6a")
@@ -147,10 +147,10 @@ def Write_this_in_English(question):
         correct_or_not=True
     try:
         is_correct=driver.find_element_by_class_name("_1x6Dk")
-        if "Another correct solution:" in is_correct:
+        if "Another correct solution:" == is_correct:
             pass
         else:
-            trueanswer=driver.find_element_by_xpath("//*[@id='root']/div/div/div/div/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div/span[2]")
+            trueanswer=driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div/div[3]/div/div/div[1]/div/div[2]/div[1]/div/div").text
     except:
         pass
     if correct_or_not == False:
@@ -164,11 +164,12 @@ def Mark_the_correct_meaning(question):
     question = driver.find_element_by_class_name("_3-JBe")
     translation = translate(question.text, "spanish")
     for x in range(len(errors)):
-        if question==errors[x][0]:
-            translation=errors[x][0]
+        if question.text==errors[x][0]:
+            translation=errors[x][1]
+    print(errors,translation)
     answers = driver.find_elements_by_class_name("_2CuNz")
     for i in answers:
-        if i.text.lower() == translation:
+        if i.text.lower() == translation.lower():
             i.click()
             correct_or_not = True
             submit_button=driver.find_element_by_class_name("_2orIw")
@@ -179,14 +180,15 @@ def Mark_the_correct_meaning(question):
         skip.click()
     try:
         is_correct=driver.find_element_by_class_name("_1x6Dk")
-        if "Another correct solution:" in is_correct:
+        print(is_correct.text)
+        if "Another correct solution:" == is_correct.text:
             pass
         else:
-            trueanswer=driver.find_element_by_xpath("//*[@id='root']/div/div/div/div/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div/span[2]")
+            trueanswer=driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div/div[3]/div/div/div[1]/div/div[2]/div[1]/div/div").text
     except:
         pass
     if correct_or_not == False:
-        errors.append([question, trueanswer])
+        errors.append([question.text, trueanswer])
         submit_button=driver.find_element_by_class_name("_2orIw")
         submit_button.click()
     return correct_or_not
@@ -212,7 +214,7 @@ def Write_this_in_Spanish(question):
     answer=translate(question,"spanish")
     for x in range(len(errors)):
         if question==errors[x][0]:
-            answer=errors[x][0]
+            answer=errors[x][1]
     text_area.send_keys(answer)
     text_area.send_keys(Keys.ENTER)
     incorrect=driver.find_elements_by_class_name("OLn6a")
@@ -220,10 +222,11 @@ def Write_this_in_Spanish(question):
         correct_or_not=True
     try:
         is_correct=driver.find_element_by_class_name("_1x6Dk")
-        if "Another correct solution:" in is_correct:
+        print(is_correct.text)
+        if "Another correct solution:" == is_correct.text:
             pass
         else:
-            trueanswer=driver.find_element_by_xpath("//*[@id='root']/div/div/div/div/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div/span[2]")
+            trueanswer=driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div/div[3]/div/div/div[1]/div/div[2]/div[1]/div/div").text
     except:
         pass
     if correct_or_not == False:

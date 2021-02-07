@@ -32,7 +32,7 @@ def lesson(lesson):
     question()
     question()
     question()
-
+\
 def question():
     time.sleep(1)
     correct_or_not = False

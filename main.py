@@ -172,6 +172,9 @@ def Mark_the_correct_meaning(question):
             submit_button=driver.find_element_by_class_name("_2orIw")
             submit_button.click()
             submit_button.click()
+    if correct_or_not == False:
+        skip=driver.find_element_by_class_name("J51YJ")
+        skip.click()
     try:
         is_correct=driver.find_element_by_class_name("_1x6Dk")
         if "Another correct solution:" in is_correct:
@@ -241,5 +244,5 @@ def translate(question, language):
 
 
 
-lesson("Intro")
+lesson("Description")
     

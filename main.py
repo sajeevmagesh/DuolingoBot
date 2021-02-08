@@ -102,6 +102,9 @@ def Which_one_of_these_is(question):
             submit_button=driver.find_element_by_class_name("_2orIw")
             submit_button.click()
             submit_button.click()
+    if correct_or_not == False:
+        skip=driver.find_element_by_class_name("J51YJ")
+        skip.click()
     try:
         is_correct=driver.find_element_by_class_name("_1x6Dk")
         if "Another correct solution:" == is_correct:
@@ -246,6 +249,10 @@ def translate(question, language):
         return None
     time.sleep(3.5)
     translation = secondwindow.find_element_by_class_name("VIiyi")
+    try:
+        translation = secondwindow.find_element_by_xpath("/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[2]/c-wiz[2]/div[5]/div[2]/div[1]/span[1]")
+    except:
+        pass
     translation2=translation.text.lower()
     secondwindow.quit()
     return translation2

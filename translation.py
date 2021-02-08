@@ -29,4 +29,4 @@ def translate(question, language):
 
     driver.quit()
 
-print(translate("are you there yet?", "spanish"))
+print(translate("black", "spanish"))

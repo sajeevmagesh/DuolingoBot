@@ -1,3 +1,4 @@
+#!/usr/local/bin/python3
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -6,8 +7,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 import time
 import urllib.parse
-username="Test1234"
-password="Test1234"
+username="test1234"
+password="1234"
 PATH = "./chromedriver"
 
 driver=webdriver.Chrome(PATH)
@@ -30,12 +31,25 @@ errors=[]
 def lesson(lesson):
     driver.get(f"https://www.duolingo.com/skill/es/{lesson}/")
     while True:
-        time.sleep(3)
+        time.sleep(4)
         question()
         end_check=driver.find_elements_by_class_name("_2XF-t")
         if len(end_check)>0:
             submit_button=driver.find_element_by_class_name("_2orIw")
             submit_button.click()
+            try:
+                submit_button.click()
+            except:
+                pass
+            try:
+                submit_button.click()
+            except:
+                pass
+            
+            try:
+                submit_button.click()
+            except:
+                pass
             try:
                 submit_button.click()
             except:
@@ -61,15 +75,16 @@ def question():
             submit_button.click()
             correct_or_not = True
             return None
-    
     try:
         question=driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div/div[2]/div/div/div/div/div[1]/h1/span").text
     except:
-        submit_button=driver.find_element_by_class_name("_2orIw")
-        submit_button.click()
-        correct_or_not = True
-        return None
-
+        try:
+            submit_button=driver.find_element_by_class_name("_2orIw")
+            submit_button.click()
+            correct_or_not = True
+            return None
+        except:
+            return None
     if "Which one of these is" in question:
         Which_one_of_these_is(question)
     elif "Write this in English" in question:
@@ -259,5 +274,8 @@ def translate(question, language):
 
 
 
-lesson("Description")
-    
+
+   
+
+lesson("Phrases-2")
+

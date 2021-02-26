@@ -28,12 +28,10 @@ correct_or_not = False
 
 time.sleep(7)
 errors=[]
-prevq=""
 def lesson(lesson):
-    prevq=""
     driver.get(f"https://www.duolingo.com/skill/es/{lesson}/")
     while True:
-        time.sleep(4)
+        time.sleep(7)
         question()
         end_check=driver.find_elements_by_class_name("_2XF-t")
         if len(end_check)>0:
@@ -80,9 +78,7 @@ def question():
             return None
     try:
         question=driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div/div[2]/div/div/div/div/div[1]/h1/span").text
-        if question==prevq and prevq!="":
-            return None
-        prevq=question
+
         
     except:
         try:
@@ -285,6 +281,8 @@ def translate(question, language):
    
 
 lesson("Routines-2")
-lesson("Routines-2")
-lesson("Routines-2")
+lesson("Community-2")
+lesson("Community-2")
+lesson("Community-2")
+lesson("Community-2")
 

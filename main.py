@@ -8,7 +8,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 import urllib.parse
 username="test1234"
-password="1234"
+password="test1234"
 PATH = "./chromedriver"
 
 driver=webdriver.Chrome(PATH)
@@ -28,7 +28,9 @@ correct_or_not = False
 
 time.sleep(7)
 errors=[]
+prevq=""
 def lesson(lesson):
+    prevq=""
     driver.get(f"https://www.duolingo.com/skill/es/{lesson}/")
     while True:
         time.sleep(4)
@@ -59,6 +61,7 @@ def lesson(lesson):
             except:
                 pass
             break
+
 def question():
     time.sleep(1)
     correct_or_not = False
@@ -77,6 +80,10 @@ def question():
             return None
     try:
         question=driver.find_element_by_xpath("/html/body/div[1]/div/div/div/div/div[2]/div/div/div/div/div[1]/h1/span").text
+        if question==prevq and prevq!="":
+            return None
+        prevq=question
+        
     except:
         try:
             submit_button=driver.find_element_by_class_name("_2orIw")
@@ -277,5 +284,7 @@ def translate(question, language):
 
    
 
-lesson("Phrases-2")
+lesson("Routines-2")
+lesson("Routines-2")
+lesson("Routines-2")
 
